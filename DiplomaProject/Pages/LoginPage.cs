@@ -1,4 +1,5 @@
 ﻿using DiplomaProject.Configuration;
+using DiplomaProject.Wrappers;
 using OpenQA.Selenium;
 
 namespace DiplomaProject.Pages;
@@ -7,9 +8,10 @@ public class LoginPage : BasePage
 {
     private const string Endpoint = "/login";
     
-    private IWebElement EmailInput => Driver.FindElement(By.Id("inputEmail"));
-    private IWebElement PasswordInput => Driver.FindElement( By.Id("inputPassword"));
-    private IWebElement LoginButton => Driver.FindElement( By.Id("btnLogin"));
+    private UiElement EmailInput => new (Driver, By.Id("inputEmail"));
+    private UiElement PasswordInput => new (Driver, By.Id("inputPassword"));
+    private Button Login => new (Driver, By.Id("btnLogin"));
+    private UiElement ErrorMessage => new (Driver, By.XPath("//*[@data-qase-test='login-error']"));
 
     public LoginPage(IWebDriver driver, bool openPageByUrl) : base(driver, openPageByUrl)
     {
@@ -23,7 +25,7 @@ public class LoginPage : BasePage
     {
         Driver.Navigate().GoToUrl(Configurator.AppSettings.UiUrl + Endpoint);
     }
- 
+    
     public LoginPage InputUsernameAndPassword(string username, string password)
     {
         EmailInput.SendKeys(username);
@@ -34,7 +36,7 @@ public class LoginPage : BasePage
 
     public LoginPage SubmitLoginForm()
     {
-        LoginButton.Click();
+        Login.Click();
         
         return this;
     }
