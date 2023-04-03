@@ -35,7 +35,13 @@ public class Configurator
                          ?? throw new InvalidOperationException(
                              "URL for API requests not found. Check your appsetting.json file."),
                 UiUrl = Configuration["AppSettings:UiURL"]
-                        ?? throw new InvalidOperationException("UI URL not found. Check your appsetting.json file.")
+                        ?? throw new InvalidOperationException("UI URL not found. Check your appsetting.json file."),
+                Browser = Configuration["AppSettings:Browser"]
+                          ?? throw new InvalidOperationException(
+                              "Browser not found. Check your appsetting.json file."),
+                WaitTimeout = int.Parse(Configuration["AppSettings:WaitTimeout"] 
+                                        ?? throw new InvalidOperationException(
+                                            "Default wait timeout not set. Check your appsetting.json file."))
             };
 
             return appSettings;
