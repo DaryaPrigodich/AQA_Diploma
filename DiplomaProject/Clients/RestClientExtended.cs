@@ -15,6 +15,8 @@ public class RestClientExtended
         var options = new RestClientOptions(Configurator.AppSettings.ApiUrl);
 
         _client = new RestClient(options);
+        _client.AddDefaultHeader("Token", Configurator.Admin?.Token 
+                                          ?? throw new InvalidOperationException("Token is invalid. Check your appsetting.json file."));
     }
 
     public async Task<T> ExecuteAsync<T>(RestRequest request)
