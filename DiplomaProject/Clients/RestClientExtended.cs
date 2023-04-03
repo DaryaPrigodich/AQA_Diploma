@@ -1,4 +1,5 @@
 using DiplomaProject.Configuration;
+using DiplomaProject.Models.Enum;
 using NLog;
 using RestSharp;
 
@@ -7,16 +8,24 @@ namespace DiplomaProject.Clients;
 public class RestClientExtended
 {
     private readonly RestClient _client;
-    
+
     private readonly Logger _logger = LogManager.GetCurrentClassLogger();
 
-    public RestClientExtended()
+    public RestClientExtended(UserType userType)
     {
-        var options = new RestClientOptions(Configurator.AppSettings.ApiUrl);
+        if (userType == UserType.Admin)
+        {
+            var options = new RestClientOptions(Configurator.AppSettings.ApiUrl);
 
-        _client = new RestClient(options);
-        _client.AddDefaultHeader("Token", Configurator.Admin?.Token 
-                                          ?? throw new InvalidOperationException("Token is invalid. Check your appsetting.json file."));
+            _client = new RestClient(options);
+            _client.AddDefaultHeader("Token", Configurator.Admin?.Token
+                                              ?? throw new InvalidOperationException(
+                                                  "Token is invalid. Check your appsetting.json file."));
+        }
+        else
+        {
+            throw new InvalidOperationException("You don't have access.");
+        }
     }
 
     public async Task<T> ExecuteAsync<T>(RestRequest request)
