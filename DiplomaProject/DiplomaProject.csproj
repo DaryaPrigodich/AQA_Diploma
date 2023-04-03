@@ -10,6 +10,7 @@
 
     <ItemGroup>
         <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
+        <PackageReference Include="FluentAssertions" Version="6.10.0" />
         <PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0-preview.2.23128.3" />
         <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="8.0.0-preview.2.23128.3" />
         <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0-preview.2.23128.3" />
