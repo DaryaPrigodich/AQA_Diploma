@@ -40,4 +40,9 @@ public class LoginPage : BasePage
         
         return this;
     }
+    
+    public string GetLoginErrorMessage()
+    {
+        return ErrorMessage.Text; 
+    }
 }

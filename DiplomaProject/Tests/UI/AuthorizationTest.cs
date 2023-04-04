@@ -11,7 +11,7 @@ public class AuthorizationTest: BaseUiTest
     public void AuthorizationUsingValidCredentials()
     {
         var projectOverviewPage = LoginSteps
-            .LoginWithValidData(Configurator.Admin.Username, Configurator.Admin.Password);
+            .LoginWithValidCredentials(Configurator.Admin.Username, Configurator.Admin.Password);
 
         projectOverviewPage.IsPageOpened().Should().BeTrue("User credentials are invalid.");
     }
