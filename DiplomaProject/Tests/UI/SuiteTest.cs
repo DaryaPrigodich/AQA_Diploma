@@ -49,6 +49,19 @@ public class SuiteTest : BaseUiTest
         
         lengthOfCreatedSuiteName.Should().Be(lengthOfSuiteName,"Suite hasn't created with allowed number of characters in suite name input.");
     }
+    
+    [Test]
+    [Category("Boundary")]
+    [TestCase(256,"The title may not be greater than 255 characters.")]
+    public void CreateSuiteWithInvalidNumberOfCharactersInSuiteNameInput(int lengthOfSuiteName, string expectedErrorMessage)
+    {
+        var errorMessage = _projectOverviewPage
+            .OpenProjectByTittle(_project.Title)
+            .ClickAddSuiteButton()
+            .CreateSuiteWithLengthOfSuiteName<string>(lengthOfSuiteName);
+
+        errorMessage.Should().Be(expectedErrorMessage,"Suite has created with invalid number of characters in suite name input.");
+    }
 
     [TearDown]
     public void SetUpPostConditionSteps()
