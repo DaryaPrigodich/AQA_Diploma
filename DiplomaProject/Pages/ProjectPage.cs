@@ -32,4 +32,23 @@ public class ProjectPage : BasePage
 
         return this;
     }
+    
+    public ProjectPage SelectOptionByValue(string optionValue)
+    {
+        FilterOptions.GetOptionByValue(optionValue).Click();
+        
+        return this;
+    }
+
+    public ProjectPage SelectCheckBoxByValue(string checkBoxValue)
+    {
+        PriorityOptions.GetCheckBoxByValue(checkBoxValue).Click();
+        
+        return this;
+    }
+
+    public string GetMissingMatchingCasesMessage()
+    {
+        return MissingMatchingCasesMessage.Text;
+    }
 }

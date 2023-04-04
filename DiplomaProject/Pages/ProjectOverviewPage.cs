@@ -35,8 +35,10 @@ public class ProjectOverviewPage : BasePage
         }
     }
     
-    public void OpenProjectByTittle(string projectTittle)
+    public ProjectPage OpenProjectByTittle(string projectTittle)
     {
         Projects.GetProjectByTittle(projectTittle).Click();
+
+        return new ProjectPage(Driver, false);
     }
 }
