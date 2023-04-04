@@ -2,6 +2,7 @@
 using DiplomaProject.Fakers;
 using DiplomaProject.Models;
 using DiplomaProject.Pages;
+using FluentAssertions;
 using NUnit.Framework;
 
 namespace DiplomaProject.Tests.UI;
@@ -20,6 +21,20 @@ public class SuiteTest : BaseUiTest
        
         _projectOverviewPage = LoginSteps
             .LoginWithValidCredentials(Configurator.Admin.Username, Configurator.Admin.Password);
+    }
+    
+    [Test]
+    [Category("Positive")]
+    [TestCase("")]
+    public void CreateSuiteWithBlankRequiredInput(string suiteName)
+    {
+        var isSuiteNotCreated = _projectOverviewPage
+            .OpenProjectByTittle(_project.Title)
+            .ClickAddSuiteButton()
+            .CreateSuiteWithOnlyRequiredInputs(suiteName)
+            .IsCreateSuiteFormVisible();
+        
+        isSuiteNotCreated.Should().BeTrue("Suite has created with blank required suite name input.");
     }
 
     [TearDown]
