@@ -1,4 +1,5 @@
-﻿using DiplomaProject.Configuration;
+﻿using System.Collections.ObjectModel;
+using DiplomaProject.Configuration;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
@@ -30,5 +31,10 @@ public class WaitService
     public IWebElement WaitElementIsClickable(IWebElement webElement)
     {
         return _waitService.Until(ExpectedConditions.ElementToBeClickable(webElement));
+    }
+    
+    public ReadOnlyCollection<IWebElement> GetAllVisibleElements(ReadOnlyCollection<IWebElement> elements)
+    {
+        return _waitService.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(elements));
     }
 }
