@@ -1,4 +1,5 @@
 ﻿using DiplomaProject.Configuration;
+using DiplomaProject.Wrappers;
 using OpenQA.Selenium;
 
 namespace DiplomaProject.Pages;
@@ -7,7 +8,7 @@ public class ProjectOverviewPage : BasePage
 {
     private const string Endpoint = "/projects";
     
-    private IWebElement Projects => Driver.FindElement(By.XPath("//table"));
+    private Table Projects => new(Driver, By.XPath("//table"));
 
     public ProjectOverviewPage(IWebDriver driver, bool openPageByUrl) : base(driver, openPageByUrl)
     {
@@ -32,5 +33,10 @@ public class ProjectOverviewPage : BasePage
         {
             return false;
         }
+    }
+    
+    public void OpenProjectByTittle(string projectTittle)
+    {
+        Projects.GetProjectByTittle(projectTittle).Click();
     }
 }
