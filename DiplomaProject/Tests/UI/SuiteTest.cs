@@ -24,7 +24,7 @@ public class SuiteTest : BaseUiTest
     }
     
     [Test]
-    [Category("Positive")]
+    [Category("Negative")]
     [TestCase("")]
     public void CreateSuiteWithBlankRequiredInput(string suiteName)
     {

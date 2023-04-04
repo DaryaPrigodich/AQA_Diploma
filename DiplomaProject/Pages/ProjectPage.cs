@@ -16,7 +16,9 @@ public class ProjectPage : BasePage
     private UiElement SuiteNameInput => new(Driver, By.Id("title"));
     private Button CreateSuite => new (Driver, By.XPath("//*[@type='submit']"));
     private UiElement CreateSuiteForm => new (Driver, By.XPath("(//*[@role='dialog'])[2]"));
-
+    private UiElement SideSuite => new (Driver, By.XPath("//*[contains(@class,'Vap5jx')]"));
+    private UiElement ErrorMessage => new (Driver, By.XPath("//*[contains(text(),'255 characters')]"));
+    
     public ProjectPage(IWebDriver driver, bool openPageByUrl) : base(driver, openPageByUrl)
     {
     }
@@ -74,5 +76,22 @@ public class ProjectPage : BasePage
     public bool IsCreateSuiteFormVisible()
     {
         return CreateSuiteForm.Displayed;
+    }
+    
+    public T CreateSuiteWithLengthOfSuiteName<T>(int lengthOfSuiteName)
+    {
+        const int MaxAllowableLength = 255;
+        
+        var suiteName = new Bogus.Faker().Lorem.Letter(lengthOfSuiteName);
+
+        SuiteNameInput.SendKeys(suiteName);
+        CreateSuite.Click();
+
+        if (lengthOfSuiteName > MaxAllowableLength)
+        {
+            return (T)Convert.ChangeType(ErrorMessage.Text, typeof(T));
+        }
+        
+        return (T)Convert.ChangeType(SideSuite.Text.Length, typeof(T));
     }
 }
