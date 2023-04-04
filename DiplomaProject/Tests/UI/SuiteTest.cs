@@ -36,6 +36,19 @@ public class SuiteTest : BaseUiTest
         
         isSuiteNotCreated.Should().BeTrue("Suite has created with blank required suite name input.");
     }
+    
+    [Test]
+    [Category("Boundary")]
+    [TestCase(1), TestCase(254), TestCase(255)]
+    public void CreateSuitePassingAllowedNumberOfCharacters(int lengthOfSuiteName)
+    {
+        var lengthOfCreatedSuiteName = _projectOverviewPage
+            .OpenProjectByTittle(_project.Title)
+            .ClickAddSuiteButton()
+            .CreateSuiteWithLengthOfSuiteName<int>(lengthOfSuiteName);
+        
+        lengthOfCreatedSuiteName.Should().Be(lengthOfSuiteName,"Suite hasn't created with allowed number of characters in suite name input.");
+    }
 
     [TearDown]
     public void SetUpPostConditionSteps()
