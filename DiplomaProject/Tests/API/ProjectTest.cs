@@ -23,4 +23,14 @@ public class ProjectTest : BaseApiTest
 
         statusCode.Should().Be(HttpStatusCode.BadRequest, "Project has created with not allowed special characters."); 
     }
+    
+    [Test]
+    [Category("Negative")]
+    [TestCase("nonexistent project")]
+    public void DeleteNonexistentProject(string nonexistentProjectCode)
+    {
+        var statusCode = ProjectService.DeleteProject(nonexistentProjectCode);
+
+        statusCode.Should().Be(HttpStatusCode.NotFound,"Status code is invalid.");
+    }
 }
