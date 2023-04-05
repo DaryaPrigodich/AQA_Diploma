@@ -21,6 +21,15 @@ public class TestCaseService : IDisposable
 
         return _client.ExecuteAsync<Response>(request);
     }
+    
+    public Task<Response> GetTestCase(string projectCode, int testCaseId)
+    {
+        var request = new RestRequest("v1/case/{code}/{id}")
+            .AddUrlSegment("code", projectCode)
+            .AddUrlSegment("id", testCaseId);
+
+        return _client.ExecuteAsync<Response>(request);
+    }
   
     public void Dispose()
     {
