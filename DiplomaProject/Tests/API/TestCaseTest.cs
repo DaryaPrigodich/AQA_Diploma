@@ -30,4 +30,19 @@ public class TestCaseTest : BaseApiTest
         
        response.Status.Should().BeTrue("Test case hasn't created.");
     }
+    
+    [Test]
+    [Order(2)]
+    public void GetTestCase()
+    {
+        var response = TestCaseService.GetTestCase(_project.Code.ToUpper(), _testCaseId).Result;
+
+        response.Result.Id.Should().Be(_testCaseId, "Test case hasn't received.");
+    }
+    
+    [OneTimeTearDown]
+    public void SetUpPostConditionSteps()
+    {
+        ProjectService.DeleteProject(_project.Code.ToUpper());
+    }
 }
