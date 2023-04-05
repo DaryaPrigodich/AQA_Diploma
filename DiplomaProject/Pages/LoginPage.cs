@@ -26,6 +26,18 @@ public class LoginPage : BasePage
         Driver.Navigate().GoToUrl(Configurator.AppSettings.UiUrl + Endpoint);
     }
     
+    public bool IsPageOpened()
+    {
+        try
+        {
+            return Login.Displayed;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+    }
+    
     public LoginPage InputUsernameAndPassword(string username, string password)
     {
         EmailInput.SendKeys(username);
