@@ -1,7 +1,6 @@
 ﻿using DiplomaProject.Clients;
 using DiplomaProject.Models;
 using RestSharp;
-using Response = OpenQA.Selenium.DevTools.V109.Network.Response;
 
 namespace DiplomaProject.Services.API;
 
