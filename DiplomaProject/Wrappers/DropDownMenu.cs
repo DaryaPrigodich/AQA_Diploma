@@ -41,7 +41,7 @@ public class DropDownMenu
         }
     }
 
-    private void OpenDropDownMenu()
+    public void OpenDropDownMenu()
     {
         var isOptionVisible = IsOptionsVisible();
 
@@ -55,8 +55,6 @@ public class DropDownMenu
 
     public IWebElement GetOptionByValue(string optionValue)
     {
-        OpenDropDownMenu();
-        
         try
         {
             return FindElement(By.XPath($"//*[text()='{optionValue}']"));
