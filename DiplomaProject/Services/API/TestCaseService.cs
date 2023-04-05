@@ -30,6 +30,16 @@ public class TestCaseService : IDisposable
 
         return _client.ExecuteAsync<Response>(request);
     }
+    
+    public Task<Response> UpdateTestCase(string projectCode, int testCaseId, TestCase testCase)
+    {
+        var request = new RestRequest("v1/case/{code}/{id}", Method.Patch)
+            .AddUrlSegment("code", projectCode)
+            .AddUrlSegment("id", testCaseId)
+            .AddJsonBody(testCase);
+
+        return _client.ExecuteAsync<Response>(request);
+    }
   
     public void Dispose()
     {

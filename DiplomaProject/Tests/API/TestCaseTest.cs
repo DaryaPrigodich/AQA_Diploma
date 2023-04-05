@@ -40,6 +40,18 @@ public class TestCaseTest : BaseApiTest
         response.Result.Id.Should().Be(_testCaseId, "Test case hasn't received.");
     }
     
+    [Test]
+    [Order(3)]
+    public void UpdateTestCase()
+    {
+        var testCaseToUpdate = new TestCaseFaker().Generate();
+        
+        var response = TestCaseService
+            .UpdateTestCase(_project.Code.ToUpper(),_testCaseId, testCaseToUpdate).Result;
+        
+        response.Status.Should().BeTrue("Test case hasn't updated.");
+    }
+    
     [OneTimeTearDown]
     public void SetUpPostConditionSteps()
     {
