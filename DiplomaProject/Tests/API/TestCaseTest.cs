@@ -52,6 +52,15 @@ public class TestCaseTest : BaseApiTest
         response.Status.Should().BeTrue("Test case hasn't updated.");
     }
     
+    [Test]
+    [Order(4)]
+    public void DeleteTestCase()
+    {
+        var statusCode = TestCaseService.DeleteTestCase(_project.Code.ToUpper(), _testCaseId);
+
+        statusCode.Should().Be(HttpStatusCode.OK, "Test case hasn't deleted.");
+    }
+    
     [OneTimeTearDown]
     public void SetUpPostConditionSteps()
     {
