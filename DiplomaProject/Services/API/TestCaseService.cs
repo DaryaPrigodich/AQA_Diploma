@@ -1,4 +1,5 @@
-﻿using DiplomaProject.Clients;
+﻿using System.Net;
+using DiplomaProject.Clients;
 using DiplomaProject.Models;
 using RestSharp;
 
@@ -39,6 +40,15 @@ public class TestCaseService : IDisposable
             .AddJsonBody(testCase);
 
         return _client.ExecuteAsync<Response>(request);
+    }
+    
+    public HttpStatusCode DeleteTestCase(string projectCode, int testCaseId)
+    {
+        var request = new RestRequest("v1/case/{code}/{id}", Method.Delete)
+            .AddUrlSegment("code", projectCode)
+            .AddUrlSegment("id", testCaseId);
+
+        return _client.ExecuteAsync(request).Result.StatusCode;
     }
   
     public void Dispose()
