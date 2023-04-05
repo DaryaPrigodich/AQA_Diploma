@@ -9,6 +9,7 @@ public class ProjectOverviewPage : BasePage
     private const string Endpoint = "/projects";
     
     private Table Projects => new(Driver, By.XPath("//table"));
+    private DropDownMenu UserMenu => new(Driver, By.XPath("//*[@class='Eb2vGG']"));
 
     public ProjectOverviewPage(IWebDriver driver, bool openPageByUrl) : base(driver, openPageByUrl)
     {
@@ -40,5 +41,19 @@ public class ProjectOverviewPage : BasePage
         Projects.GetProjectByTittle(projectTittle).Click();
 
         return new ProjectPage(Driver, false);
+    }
+    
+    public ProjectOverviewPage OpenUserMenu()
+    {
+        UserMenu.OpenDropDownMenu();
+
+        return this;
+    }
+    
+    public LoginPage SelectUserMenuOptionByValue(string optionValue)
+    {
+        UserMenu.GetOptionByValue(optionValue).Click();
+
+        return new LoginPage(Driver, false);
     }
 }
