@@ -30,6 +30,18 @@ public class MilestoneTest : BaseApiTest
         response.Status.Should().BeTrue("Milestone hasn't created with allowed number of characters in title input.");
     }
 
+    [Test]
+    [Category("Negative")][Category("Boundary")]
+    [TestCase(0), TestCase(256)]
+    public void CreateMilestonePassingNotAllowedNumberOfCharacters(int lengthOfTitle)
+    {
+        _milestone = new MilestoneFaker(lengthOfTitle).Generate();
+
+        var response = MilestoneService.CreateMilestone(_project.Code.ToUpper(), _milestone).Result;
+
+        response.Status.Should().BeFalse("Milestone has created with not allowed number of characters in title input.");
+    }
+    
     [TearDown]
     public void SetUpPostConditionSteps()
     {
