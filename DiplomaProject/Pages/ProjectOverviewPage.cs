@@ -9,7 +9,7 @@ public class ProjectOverviewPage : BasePage
     private const string Endpoint = "/projects";
     
     private Table Projects => new(Driver, By.XPath("//table"));
-    private DropDownMenu UserMenu => new(Driver, By.XPath("//*[@class='Eb2vGG']"));
+    private DropDownMenu UserMenu => new(Driver, By.XPath("(//*[contains(@src,'user')])[1]"));
 
     public ProjectOverviewPage(IWebDriver driver, bool openPageByUrl) : base(driver, openPageByUrl)
     {
