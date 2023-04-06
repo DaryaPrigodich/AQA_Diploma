@@ -7,8 +7,9 @@ namespace DiplomaProject.Tests.API;
 
 public class BaseApiTest
 {
-    protected ProjectService? ProjectService;
-    protected TestCaseService? TestCaseService;
+    protected ProjectService ProjectService;
+    protected TestCaseService TestCaseService;
+    protected MilestoneService MilestoneService;
 
     [OneTimeSetUp]
     public void SetUpApi()
@@ -17,5 +18,6 @@ public class BaseApiTest
 
         ProjectService = new ProjectService(restClient);
         TestCaseService = new TestCaseService(restClient);
+        MilestoneService = new MilestoneService(restClient);
     }
 }
