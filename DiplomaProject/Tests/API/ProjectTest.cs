@@ -14,7 +14,7 @@ public class ProjectTest : BaseApiTest
     [Test]
     [Category("Negative")][Category("Boundary")]
     [TestCase("!@#$")]
-    public void CreateProject(string unacceptableCharacters)
+    public void CreateProjectPassingNotAllowedCharacters(string unacceptableCharacters)
     {
         _project = new ProjectFaker().Generate();
         _project.Code = unacceptableCharacters;
