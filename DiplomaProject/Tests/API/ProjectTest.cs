@@ -12,7 +12,7 @@ public class ProjectTest : BaseApiTest
     private TestCase _testCase = null!;
 
     [Test]
-    [Category("Negative")] 
+    [Category("Negative")][Category("Boundary")]
     [TestCase("!@#$")]
     public void CreateProject(string unacceptableCharacters)
     {
