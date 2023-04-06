@@ -12,7 +12,7 @@ public class TestCaseTest : BaseApiTest
    
     private int _testCaseId;
 
-    [OneTimeSetUp]
+    [SetUp]
     public void SetUpPreconditionSteps()
     {
         _project = new ProjectFaker().Generate();
@@ -20,11 +20,11 @@ public class TestCaseTest : BaseApiTest
     }
 
     [Test]
-    [Order(1)]
     public void CreateTestCase()
     {
         var testCaseToCreate = new TestCaseFaker().Generate();
-        var response = TestCaseService.CreateTestCase(_project.Code.ToUpper(), testCaseToCreate).Result;
+        var response = TestCaseService
+            .CreateTestCase(_project.Code.ToUpper(), testCaseToCreate).Result;
         
         _testCaseId = response.Result.Id;
         
@@ -32,18 +32,24 @@ public class TestCaseTest : BaseApiTest
     }
     
     [Test]
-    [Order(2)]
     public void GetTestCase()
     {
+        var testCaseToCreate = new TestCaseFaker().Generate();
+        _testCaseId = TestCaseService
+            .CreateTestCase(_project.Code.ToUpper(), testCaseToCreate).Result.Result.Id;
+
         var response = TestCaseService.GetTestCase(_project.Code.ToUpper(), _testCaseId).Result;
 
         response.Result.Id.Should().Be(_testCaseId, "Test case hasn't received.");
     }
     
     [Test]
-    [Order(3)]
     public void UpdateTestCase()
     {
+        var testCaseToCreate = new TestCaseFaker().Generate();
+        _testCaseId = TestCaseService
+            .CreateTestCase(_project.Code.ToUpper(), testCaseToCreate).Result.Result.Id;
+
         var testCaseToUpdate = new TestCaseFaker().Generate();
         
         var response = TestCaseService
@@ -53,15 +59,18 @@ public class TestCaseTest : BaseApiTest
     }
     
     [Test]
-    [Order(4)]
     public void DeleteTestCase()
     {
+        var testCaseToCreate = new TestCaseFaker().Generate();
+        _testCaseId = TestCaseService
+            .CreateTestCase(_project.Code.ToUpper(), testCaseToCreate).Result.Result.Id;
+
         var statusCode = TestCaseService.DeleteTestCase(_project.Code.ToUpper(), _testCaseId);
 
         statusCode.Should().Be(HttpStatusCode.OK, "Test case hasn't deleted.");
     }
     
-    [OneTimeTearDown]
+    [TearDown]
     public void SetUpPostConditionSteps()
     {
         ProjectService.DeleteProject(_project.Code.ToUpper());
