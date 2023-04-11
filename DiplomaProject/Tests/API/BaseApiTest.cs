@@ -12,7 +12,7 @@ public class BaseApiTest
     protected MilestoneService MilestoneService;
 
     [OneTimeSetUp]
-    public void SetUpApi()
+    public void SetUpClient()
     {
         var restClient = new RestClientExtended(UserType.Admin);
 

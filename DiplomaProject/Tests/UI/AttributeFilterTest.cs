@@ -1,13 +1,19 @@
-﻿using Diploma.Models.Enum;
+﻿using Allure.Commons;
+using Diploma.Models.Enum;
 using DiplomaProject.Configuration;
 using DiplomaProject.Fakers;
 using DiplomaProject.Models;
 using DiplomaProject.Pages;
 using FluentAssertions;
+using NUnit.Allure.Attributes;
+using NUnit.Allure.Core;
 using NUnit.Framework;
 
 namespace DiplomaProject.Tests.UI;
 
+[AllureNUnit]
+[AllureParentSuite("UI")]
+[AllureFeature("Attribute filter")]
 public class AttributeFilterTest : BaseUiTest
 {
     private Project _project = null!;
@@ -16,6 +22,7 @@ public class AttributeFilterTest : BaseUiTest
     private ProjectOverviewPage _projectOverviewPage = null!;
     
     [SetUp]
+    [Description("Execution of pre-condition steps")]
     public void SetUpPreconditionSteps()
     {
         _project = new ProjectFaker().Generate();
@@ -30,7 +37,11 @@ public class AttributeFilterTest : BaseUiTest
     }
 
     [Test]
+    [Category("Positive")]
+    [AllureSeverity(SeverityLevel.normal)]
     [TestCase("Cases matching your criteria are not found.")]
+    [AllureName("Test filter functionality for test case attributes")]
+    [AllureTms("https://app.qase.io/project/DIPLOMA?case=3&previewMode=modal&suite=3")]
     public void TestCaseAttributeFilter(string expectedMessage)
     {
         var matchingCasesMessage = _projectOverviewPage
@@ -44,6 +55,7 @@ public class AttributeFilterTest : BaseUiTest
     }
 
     [TearDown]
+    [Description("Execution of post-condition steps")]
     public void SetUpPostConditionSteps()
     {
         ProjectService.DeleteProject(_project.Code.ToUpper());

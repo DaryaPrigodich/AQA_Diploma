@@ -1,5 +1,6 @@
 ﻿using DiplomaProject.Configuration;
 using DiplomaProject.Wrappers;
+using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
 
 namespace DiplomaProject.Pages;
@@ -36,13 +37,15 @@ public class ProjectOverviewPage : BasePage
         }
     }
     
+    [AllureStep("Open \"{0}\" project repository")]
     public ProjectPage OpenProjectByTittle(string projectTittle)
     {
         Projects.GetProjectByTittle(projectTittle).Click();
 
-        return new ProjectPage(Driver, false);
+        return new ProjectPage(Driver);
     }
     
+    [AllureStep("Click on \"UserMenu\" button on the navigation menu")]
     public ProjectOverviewPage OpenUserMenu()
     {
         UserMenu.OpenDropDownMenu();
@@ -50,10 +53,11 @@ public class ProjectOverviewPage : BasePage
         return this;
     }
     
+    [AllureStep("Click \"{0}\" menu option")]
     public LoginPage SelectUserMenuOptionByValue(string optionValue)
     {
         UserMenu.GetOptionByValue(optionValue).Click();
 
-        return new LoginPage(Driver, false);
+        return new LoginPage(Driver);
     }
 }

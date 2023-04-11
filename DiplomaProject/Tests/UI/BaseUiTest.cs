@@ -17,14 +17,11 @@ public class BaseUiTest
     
     protected ProjectService? ProjectService;
     protected TestCaseService? TestCaseService;
-
-    private WaitService _waitService;
     
     [SetUp]
-    public void Setup()
+    public void SetupBrowser()
     {
         Driver = new BrowserService(Configurator.AppSettings.Browser).WebDriver;
-        _waitService = new WaitService(Driver);
         
         var restClient = new RestClientExtended(UserType.Admin);
         ProjectService = new ProjectService(restClient);
@@ -34,7 +31,7 @@ public class BaseUiTest
     }
     
     [TearDown]
-    public void TearDown()
+    public void CloseBrowser()
     {
         Driver.Quit();
     }

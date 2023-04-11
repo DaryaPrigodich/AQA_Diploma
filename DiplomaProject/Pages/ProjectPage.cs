@@ -1,5 +1,6 @@
 ﻿using DiplomaProject.Configuration;
 using DiplomaProject.Wrappers;
+using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
 
 namespace DiplomaProject.Pages;
@@ -32,6 +33,7 @@ public class ProjectPage : BasePage
         Driver.Navigate().GoToUrl(Configurator.AppSettings.UiUrl + Endpoint);
     }
 
+    [AllureStep("Click on \"AddFilter\" button")]
     public ProjectPage OpenFilterOptions()
     {
         AddFilter.Click();
@@ -39,6 +41,7 @@ public class ProjectPage : BasePage
         return this;
     }
     
+    [AllureStep("Click on \"{0}\" attribute")]
     public ProjectPage SelectOptionByValue(string optionValue)
     {
         FilterOptions.GetOptionByValue(optionValue).Click();
@@ -46,6 +49,7 @@ public class ProjectPage : BasePage
         return this;
     }
 
+    [AllureStep("Click on \"{0}\" checkbox")]
     public ProjectPage SelectCheckBoxByValue(string checkBoxValue)
     {
         PriorityOptions.GetCheckBoxByValue(checkBoxValue).Click();
@@ -58,6 +62,7 @@ public class ProjectPage : BasePage
         return MissingMatchingCasesMessage.Text;
     }
     
+    [AllureStep("Click on \"+Suite\" button")]
     public ProjectPage ClickAddSuiteButton()
     {
         AddSuite.Click();
@@ -65,19 +70,20 @@ public class ProjectPage : BasePage
         return this;
     }
 
-    public ProjectPage CreateSuiteWithOnlyRequiredInputs(string suiteName)
+    [AllureStep("Click \"Create\" button")]
+    public ProjectPage ClickCreateButton()
     {
-        SuiteNameInput.SendKeys(suiteName);
         CreateSuite.Click();
         
         return this;
     }
-    
+
     public bool IsCreateSuiteFormVisible()
     {
         return CreateSuiteForm.Displayed;
     }
     
+    [AllureStep("Create suite with \"{0}\" characters in suite name input")]
     public T CreateSuiteWithLengthOfSuiteName<T>(int lengthOfSuiteName)
     {
         const int MaxAllowableLength = 255;
