@@ -1,6 +1,7 @@
 using System.Net;
 using DiplomaProject.Clients;
 using DiplomaProject.Models;
+using NUnit.Allure.Attributes;
 using RestSharp;
 
 namespace DiplomaProject.Services.API;
@@ -14,6 +15,7 @@ public class ProjectService : IDisposable
         _client = client;
     }
 
+    [AllureStep("Create project using API endpoint")]
     public HttpStatusCode CreateProject(Project project)
     {
         var request = new RestRequest("v1/project", Method.Post)
@@ -22,6 +24,7 @@ public class ProjectService : IDisposable
         return _client.ExecuteAsync(request).Result.StatusCode;
     }
 
+    [AllureStep("Delete project using API endpoint")]
     public HttpStatusCode DeleteProject(string projectCode)
     {
         var request = new RestRequest("v1/project/{code}", Method.Delete)

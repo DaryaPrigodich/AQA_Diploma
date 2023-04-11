@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using DiplomaProject.Clients;
 using DiplomaProject.Models;
+using NUnit.Allure.Attributes;
 using RestSharp;
 
 namespace DiplomaProject.Services.API;
@@ -14,6 +15,7 @@ public class TestCaseService : IDisposable
         _client = client;
     }
     
+    [AllureStep("Create test case using API endpoint")]
     public Task<Response> CreateTestCase(string projectCode, TestCase testCase)
     {
         var request = new RestRequest("v1/case/{code}", Method.Post)
@@ -23,6 +25,7 @@ public class TestCaseService : IDisposable
         return _client.ExecuteAsync<Response>(request);
     }
     
+    [AllureStep("Get test case using API endpoint")]
     public Task<Response> GetTestCase(string projectCode, int testCaseId)
     {
         var request = new RestRequest("v1/case/{code}/{id}")
@@ -32,6 +35,7 @@ public class TestCaseService : IDisposable
         return _client.ExecuteAsync<Response>(request);
     }
     
+    [AllureStep("Update test case using API endpoint")]
     public Task<Response> UpdateTestCase(string projectCode, int testCaseId, TestCase testCase)
     {
         var request = new RestRequest("v1/case/{code}/{id}", Method.Patch)
@@ -42,6 +46,7 @@ public class TestCaseService : IDisposable
         return _client.ExecuteAsync<Response>(request);
     }
     
+    [AllureStep("Delete test case using API endpoint")]
     public HttpStatusCode DeleteTestCase(string projectCode, int testCaseId)
     {
         var request = new RestRequest("v1/case/{code}/{id}", Method.Delete)

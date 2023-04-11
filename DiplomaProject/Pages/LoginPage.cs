@@ -1,5 +1,6 @@
 ﻿using DiplomaProject.Configuration;
 using DiplomaProject.Wrappers;
+using NUnit.Allure.Attributes;
 using OpenQA.Selenium;
 
 namespace DiplomaProject.Pages;
@@ -38,6 +39,7 @@ public class LoginPage : BasePage
         }
     }
     
+    [AllureStep("In the login form enter login \"{0}\" and password \"{1}\"")]
     public LoginPage InputUsernameAndPassword(string username, string password)
     {
         EmailInput.SendKeys(username);
@@ -46,6 +48,7 @@ public class LoginPage : BasePage
         return this;
     }
 
+    [AllureStep("Click \"Login\" button")]
     public LoginPage SubmitLoginForm()
     {
         Login.Click();

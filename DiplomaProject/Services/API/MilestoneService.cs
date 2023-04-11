@@ -1,5 +1,6 @@
 ﻿using DiplomaProject.Clients;
 using DiplomaProject.Models;
+using NUnit.Allure.Attributes;
 using RestSharp;
 
 namespace DiplomaProject.Services.API;
@@ -13,6 +14,7 @@ public class MilestoneService : IDisposable
         _client = client;
     }
     
+    [AllureStep("Create milestone using API endpoint")]
     public Task<Response> CreateMilestone(string projectCode, Milestone milestone)
     {
         var request = new RestRequest("v1/milestone/{code}", Method.Post)

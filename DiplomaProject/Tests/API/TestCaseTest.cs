@@ -1,11 +1,17 @@
 ﻿using System.Net;
+using Allure.Commons;
 using DiplomaProject.Fakers;
 using DiplomaProject.Models;
 using FluentAssertions;
+using NUnit.Allure.Attributes;
+using NUnit.Allure.Core;
 using NUnit.Framework;
 
 namespace DiplomaProject.Tests.API;
 
+[AllureNUnit]
+[AllureParentSuite("API")]
+[AllureFeature("Test Case")]
 public class TestCaseTest : BaseApiTest
 {
     private Project _project = null!;
@@ -13,6 +19,7 @@ public class TestCaseTest : BaseApiTest
     private int _testCaseId;
 
     [SetUp]
+    [Description("Execution of pre-condition steps")]
     public void SetUpPreconditionSteps()
     {
         _project = new ProjectFaker().Generate();
@@ -20,6 +27,10 @@ public class TestCaseTest : BaseApiTest
     }
 
     [Test]
+    [Category("Positive")]
+    [AllureSeverity(SeverityLevel.blocker)]
+    [AllureName("Create a test case using API endpoint")]
+    [AllureTms("https://app.qase.io/project/DIPLOMA?case=8&previewMode=modal&suite=9")]
     public void CreateTestCase()
     {
         var testCaseToCreate = new TestCaseFaker().Generate();
@@ -32,6 +43,10 @@ public class TestCaseTest : BaseApiTest
     }
     
     [Test]
+    [Category("Positive")]
+    [AllureSeverity(SeverityLevel.blocker)]
+    [AllureName("Get a test case using API endpoint")]
+    [AllureTms("https://app.qase.io/project/DIPLOMA?case=9&previewMode=modal&suite=9")]
     public void GetTestCase()
     {
         var testCaseToCreate = new TestCaseFaker().Generate();
@@ -44,6 +59,10 @@ public class TestCaseTest : BaseApiTest
     }
     
     [Test]
+    [Category("Positive")]
+    [AllureSeverity(SeverityLevel.blocker)]
+    [AllureName("Update a test case using API endpoint")]
+    [AllureTms("https://app.qase.io/project/DIPLOMA?case=10&previewMode=modal&suite=9")]
     public void UpdateTestCase()
     {
         var testCaseToCreate = new TestCaseFaker().Generate();
@@ -59,6 +78,10 @@ public class TestCaseTest : BaseApiTest
     }
     
     [Test]
+    [Category("Positive")]
+    [AllureSeverity(SeverityLevel.blocker)]
+    [AllureName("Delete a test case using API endpoint")]
+    [AllureTms("https://app.qase.io/project/DIPLOMA?case=11&previewMode=modal&suite=9")]
     public void DeleteTestCase()
     {
         var testCaseToCreate = new TestCaseFaker().Generate();
@@ -71,6 +94,7 @@ public class TestCaseTest : BaseApiTest
     }
     
     [TearDown]
+    [Description("Execution of post-condition steps")]
     public void SetUpPostConditionSteps()
     {
         ProjectService.DeleteProject(_project.Code.ToUpper());
