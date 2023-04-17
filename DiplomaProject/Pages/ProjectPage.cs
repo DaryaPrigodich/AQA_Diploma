@@ -9,13 +9,13 @@ public class ProjectPage : BasePage
 {
     private const string Endpoint = "project/";
     
-    private Button AddFilter => new (Driver, By.ClassName("add-filter-button"));
+    private UiElement AddFilterButton => new (Driver, By.ClassName("add-filter-button"));
     private DropDownMenu FilterOptions => new (Driver, By.XPath("//*[contains(@class,'filters-menu')]"));
     private CheckBox PriorityOptions => new (Driver, By.XPath("//*[@class='filter-checkboxes']"));
     private UiElement MissingMatchingCasesMessage => new (Driver, By.XPath("//*[contains(text(),'not found')]"));
-    private Button AddSuite => new(Driver, By.Id("create-suite-button"));
+    private UiElement AddSuiteButton => new(Driver, By.Id("create-suite-button"));
     private UiElement SuiteNameInput => new(Driver, By.Id("title"));
-    private Button CreateSuite => new (Driver, By.XPath("//*[@type='submit']"));
+    private UiElement CreateSuiteButton => new (Driver, By.XPath("//*[@type='submit']"));
     private UiElement CreateSuiteForm => new (Driver, By.XPath("(//*[@role='dialog'])[2]"));
     private UiElement SideSuite => new (Driver, By.XPath("//*[contains(@class,'Pane')]//a"));
     private UiElement ErrorMessage => new (Driver, By.XPath("//*[contains(text(),'255 characters')]"));
@@ -36,7 +36,7 @@ public class ProjectPage : BasePage
     [AllureStep("Click on \"AddFilter\" button")]
     public ProjectPage OpenFilterOptions()
     {
-        AddFilter.Click();
+        AddFilterButton.Click();
 
         return this;
     }
@@ -65,7 +65,7 @@ public class ProjectPage : BasePage
     [AllureStep("Click on \"+Suite\" button")]
     public ProjectPage ClickAddSuiteButton()
     {
-        AddSuite.Click();
+        AddSuiteButton.Click();
 
         return this;
     }
@@ -73,7 +73,7 @@ public class ProjectPage : BasePage
     [AllureStep("Click \"Create\" button")]
     public ProjectPage ClickCreateButton()
     {
-        CreateSuite.Click();
+        CreateSuiteButton.Click();
         
         return this;
     }
@@ -91,7 +91,7 @@ public class ProjectPage : BasePage
         var suiteName = new Bogus.Faker().Lorem.Letter(lengthOfSuiteName);
 
         SuiteNameInput.SendKeys(suiteName);
-        CreateSuite.Click();
+        CreateSuiteButton.Click();
 
         if (lengthOfSuiteName > MaxAllowableLength)
         {

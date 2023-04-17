@@ -11,7 +11,7 @@ public class LoginPage : BasePage
     
     private UiElement EmailInput => new (Driver, By.Id("inputEmail"));
     private UiElement PasswordInput => new (Driver, By.Id("inputPassword"));
-    private Button Login => new (Driver, By.Id("btnLogin"));
+    private UiElement LoginButton => new (Driver, By.Id("btnLogin"));
     private UiElement ErrorMessage => new (Driver, By.XPath("//*[@data-qase-test='login-error']"));
 
     public LoginPage(IWebDriver driver, bool openPageByUrl) : base(driver, openPageByUrl)
@@ -31,7 +31,7 @@ public class LoginPage : BasePage
     {
         try
         {
-            return Login.Displayed;
+            return LoginButton.Displayed;
         }
         catch (Exception e)
         {
@@ -51,7 +51,7 @@ public class LoginPage : BasePage
     [AllureStep("Click \"Login\" button")]
     public LoginPage SubmitLoginForm()
     {
-        Login.Click();
+        LoginButton.Click();
         
         return this;
     }

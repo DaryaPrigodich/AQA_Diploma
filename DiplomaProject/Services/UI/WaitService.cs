@@ -27,14 +27,14 @@ public class WaitService
     {
         return _waitService.Until(ExpectedConditions.ElementIsVisible(by));
     }
-    
+
     public IWebElement WaitElementIsClickable(IWebElement webElement)
     {
         return _waitService.Until(ExpectedConditions.ElementToBeClickable(webElement));
     }
     
-    public ReadOnlyCollection<IWebElement> GetAllVisibleElements(ReadOnlyCollection<IWebElement> elements)
+    public void WaitTillElementsVisible(ReadOnlyCollection<IWebElement> elements)
     {
-        return _waitService.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(elements));
+        _waitService.Until(ExpectedConditions.VisibilityOfAllElementsLocatedBy(elements));
     }
 }

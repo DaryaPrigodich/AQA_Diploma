@@ -9,7 +9,7 @@ public class FrontPage: BasePage
 {
     private const string Endpoint = "";
     
-    private Button LoginButton => new (Driver, By.Id("signin"));
+    private UiElement LoginButton => new (Driver, By.Id("signin"));
     
     public FrontPage(IWebDriver driver, bool openPageByUrl) : base(driver, openPageByUrl)
     {
