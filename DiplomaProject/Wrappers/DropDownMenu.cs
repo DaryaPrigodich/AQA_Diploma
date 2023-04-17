@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using DiplomaProject.Services.UI;
+using NUnit.Framework;
 using OpenQA.Selenium;
 
 namespace DiplomaProject.Wrappers;
@@ -31,7 +32,7 @@ public class DropDownMenu
         {
             var options = FindElements(By.XPath("//ul"));
 
-            _waitService.GetAllVisibleElements(options);
+            _waitService.WaitTillElementsVisible(options);
 
             return true;
         }
@@ -59,9 +60,9 @@ public class DropDownMenu
         {
             return FindElement(By.XPath($"//*[text()='{optionValue}']"));
         }
-        catch (NoSuchElementException e)
+        catch (NoSuchElementException)
         {
-            Console.WriteLine("Option with such value doesn't exist.");
+            TestContext.WriteLine("Option with such value doesn't exist.");
 
             throw;
         }

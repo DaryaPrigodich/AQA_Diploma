@@ -56,13 +56,13 @@ public class UiElement : IWebElement
         {
            _waitService.WaitElementIsClickable(_webElement).Click();
         }
-        catch (Exception e)
+        catch (Exception)
         {
             try
             {
                _actions.MoveToElement(_webElement).Click().Build().Perform();
             }
-            catch (Exception exception)
+            catch (Exception)
             {
                 _jsExecutor.ExecuteScript("arguments[0].click()", _webElement);
             }

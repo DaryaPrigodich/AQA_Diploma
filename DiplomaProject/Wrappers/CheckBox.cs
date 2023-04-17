@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace DiplomaProject.Wrappers;
 
@@ -22,9 +23,9 @@ public class CheckBox
         {
             return FindElement(By.XPath($"//*[text()='{checkBoxValue}']"));
         }
-        catch (NoSuchElementException e)
+        catch (NoSuchElementException)
         {
-            Console.WriteLine("CheckBox with such value doesn't exist.");
+            TestContext.WriteLine("CheckBox with such value doesn't exist.");
             
             throw;
         }

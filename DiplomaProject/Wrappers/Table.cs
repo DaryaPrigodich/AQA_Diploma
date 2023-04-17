@@ -5,13 +5,13 @@ namespace DiplomaProject.Wrappers;
 public class Table
 {
     private UiElement _uiElement;
-
+ 
+    public bool Displayed => _uiElement.Displayed;
+   
     public Table(IWebDriver driver,By by)
     {
         _uiElement = new UiElement(driver, by);
     }
-    
-    public bool Displayed => _uiElement.Displayed;
     
     private IWebElement FindElement(By by)
     {
