@@ -40,7 +40,7 @@
 * Factory
 * Chain of invocations
 * Decorator
-* Mediator
+
 
 ## Git strategy 
 
